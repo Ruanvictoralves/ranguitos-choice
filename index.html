@@ -254,6 +254,7 @@
 <body>
 
 <audio id="bgMusic" src="audio/Wild Pokémon Battle - Pokémon Red_Blue_Yellow Soundtrack - Daintii Music (youtube).mp3" autoplay loop preload="auto"></audio>
+<audio id="selectSound" src="audio/Pokemon (A Button) - Sound Effect (HD) - Gaming Sound FX (youtube).mp3" preload="auto"></audio>
 
 <div class="stage">
 
@@ -316,6 +317,7 @@
   const resultMsg = document.getElementById('resultMsg');
   const statusLine = document.getElementById('statusLine');
   const bgMusic = document.getElementById('bgMusic');
+  const selectSound = document.getElementById('selectSound');
 
   // >>> IMPORTANTE: troque pelo endpoint do seu formulário Formspree <<<
   // 1. Crie uma conta gratuita em https://formspree.io usando o e-mail ruanzinvic@gmail.com
@@ -324,6 +326,8 @@
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/mgogovbo";
 
   bgMusic.volume = 0.22;
+  selectSound.volume = 0.45;
+
   bgMusic.play().catch(() => {
     const startMusic = () => {
       bgMusic.play();
@@ -344,6 +348,9 @@
     const accent = card.dataset.accent;
     const msg = card.dataset.msg;
     const image = card.querySelector('img').cloneNode();
+
+    selectSound.currentTime = 0;
+    selectSound.play().catch(() => {});
 
     // transição visual
     grid.classList.add('hide');
