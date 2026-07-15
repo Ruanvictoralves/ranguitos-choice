@@ -253,6 +253,8 @@
 </head>
 <body>
 
+<audio id="bgMusic" src="audio/Wild Pokémon Battle - Pokémon Red_Blue_Yellow Soundtrack - Daintii Music (youtube).mp3" autoplay loop preload="auto"></audio>
+
 <div class="stage">
 
   <div class="eyebrow" id="eyebrow"><span class="pokeball-dot"></span> Presente de Ranguito</div>
@@ -313,12 +315,24 @@
   const resultFlavor = document.getElementById('resultFlavor');
   const resultMsg = document.getElementById('resultMsg');
   const statusLine = document.getElementById('statusLine');
+  const bgMusic = document.getElementById('bgMusic');
 
   // >>> IMPORTANTE: troque pelo endpoint do seu formulário Formspree <<<
   // 1. Crie uma conta gratuita em https://formspree.io usando o e-mail ruanzinvic@gmail.com
   // 2. Crie um novo formulário e copie o endpoint (algo como https://formspree.io/f/xxxxxxx)
   // 3. Cole o endpoint na linha abaixo, no lugar de "COLE_SEU_ENDPOINT_AQUI"
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/mgogovbo";
+
+  bgMusic.volume = 0.22;
+  bgMusic.play().catch(() => {
+    const startMusic = () => {
+      bgMusic.play();
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('touchstart', startMusic);
+    };
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
+  });
 
   cards.forEach(card => {
     card.addEventListener('click', () => choose(card));
