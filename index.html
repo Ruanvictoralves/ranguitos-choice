@@ -253,7 +253,7 @@
 </head>
 <body>
 
-<audio id="bgMusic" src="audio/Wild Pokémon Battle - Pokémon Red_Blue_Yellow Soundtrack - Daintii Music (youtube).mp3" autoplay loop preload="auto"></audio>
+<audio id="bgMusic" src="audio/Wild Pokémon Battle - Pokémon Red_Blue_Yellow Soundtrack - Daintii Music (youtube).mp3" autoplay loop preload="auto" playsinline></audio>
 <audio id="selectSound" src="audio/Pokemon (A Button) - Sound Effect (HD) - Gaming Sound FX (youtube).mp3" preload="auto"></audio>
 
 <div class="stage">
@@ -282,7 +282,7 @@
       <p class="pick-hint">Toque para escolher →</p>
     </button>
 
-    <button class="card water" data-name="Squirtle" data-gift="Gabinete de PC" data-accent="#3E9CE8" data-msg="💧 Prático, resistente e construído para durar.">
+    <button class="card water" data-name="Squirtle" data-gift="Action figure do Gengar" data-accent="#3E9CE8" data-msg="💧 Prático, resistente e construído para durar.">
       <div class="art-wrap">
         <img src="images/Squirtle-PNG-HD-Image.png" alt="Squirtle">
       </div>
@@ -328,9 +328,15 @@
   bgMusic.volume = 0.22;
   selectSound.volume = 0.45;
 
-  bgMusic.play().catch(() => {
+  const startBackgroundMusic = () => {
+    bgMusic.volume = 0.22;
+    bgMusic.load();
+    return bgMusic.play();
+  };
+
+  startBackgroundMusic().catch(() => {
     const startMusic = () => {
-      bgMusic.play();
+      startBackgroundMusic();
       document.removeEventListener('click', startMusic);
       document.removeEventListener('touchstart', startMusic);
     };
